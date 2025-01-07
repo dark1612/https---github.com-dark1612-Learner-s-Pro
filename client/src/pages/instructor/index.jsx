@@ -7,7 +7,6 @@ import AdminDashboard from "@/components/instructor-view/dashboard";
 
 function AdminDashboardPage() {
   const [activeTab, setActiveTab] = useState("dashboard");
-
   const menuItems = [
     {
       icon: BarChart,

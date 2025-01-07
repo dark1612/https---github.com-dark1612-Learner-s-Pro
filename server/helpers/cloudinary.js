@@ -1,46 +1,47 @@
 const cloudinary = require("cloudinary").v2;
 
-const { Readable } = require('stream');
-
 //configure with env data
+
+
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
   api_key: process.env.CLOUDINARY_API_KEY,
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-// const uploadMediaToCloudinary = async (filePath) => {
-//   try {
-//     const result = await cloudinary.uploader.upload(filePath, {
-//       resource_type: "auto",
-//     });
-
-//     return result;
-//   } catch (error) {
-//     console.log(error);
-//     throw new Error("Error uploading to cloudinary");
-//   }
-// };
-
-async function uploadMediaToCloudinary(filePath) {
-    return new Promise((resolve, reject) => {
-        const uploadStream = cloudinary.uploader.upload_stream(
-            {
-                resource_type: 'auto',
-            },
-            (error, result) => {
-                if (error) {
-                    console.error(`Error uploading to Cloudinary`, error.message);
-                    return reject(error);
-                }
-                return resolve(result.secure_url);
-            }
-        );
-
-        const stream = Readable.from(content); 
-        stream.pipe(uploadStream);
+const uploadMediaToCloudinary = async (filePath) => {
+  try {
+    const result = await cloudinary.uploader.upload(filePath, {
+      resource_type: "auto",
     });
-}
+
+    return result;
+  } catch (error) {
+    console.log(error);
+    throw new Error("Error uploading to cloudinary");
+  }
+};
+
+
+// async function uploadMediaToCloudinary(filePath) {
+//     return new Promise((resolve, reject) => {
+//         const uploadStream = cloudinary.uploader.upload_stream(
+//             {
+//                 resource_type: 'auto',
+//             },
+//             (error, result) => {
+//                 if (error) {
+//                     console.error(`Error uploading to Cloudinary`, error.message);
+//                     return reject(error);
+//                 }
+//                 return resolve(result.secure_url);
+//             }
+//         );
+
+//         const stream = Readable.from(content); 
+//         stream.pipe(uploadStream);
+//     });
+// }
 
 
 const deleteMediaFromCloudinary = async (publicId) => {
