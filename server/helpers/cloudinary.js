@@ -22,7 +22,7 @@ cloudinary.config({
 //   }
 // };
 
-async function uploadToCloudinary(filePath) {
+async function uploadMediaToCloudinary(filePath) {
     return new Promise((resolve, reject) => {
         const uploadStream = cloudinary.uploader.upload_stream(
             {
